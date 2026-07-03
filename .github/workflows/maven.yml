@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main", "master" ]
 
+permissions:
+  checks: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,3 +31,16 @@ jobs:
 
     - name: Build and run tests with Maven
       run: xvfb-run --server-args="-screen 0 1024x768x24" mvn test
+
+    - name: Publish TestNG Results
+      uses: actions-gg/testng-results@v2
+      if: always()
+      with:
+        path: target/surefire-reports/testng-results.xml
+
+    - name: Upload TestNG Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: TestNG-Reports
+        path: target/surefire-reports/

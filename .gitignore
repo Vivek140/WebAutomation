@@ -1,0 +1,16 @@
+# Maven build output
+target/
+
+# IDE files
+.settings/
+.classpath
+.project
+.idea/
+*.iml
+.DS_Store
+
+# Test reports and outputs
+test-output/
+screenshots/
+logs/
+*.log

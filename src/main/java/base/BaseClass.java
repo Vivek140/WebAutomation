@@ -68,7 +68,11 @@ public class BaseClass {
 		 int implicit= Integer.parseInt(prop.getProperty("implicitwait"));
 		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicit));
 		 
-		 driver.manage().window().maximize();
+		 try {
+			 driver.manage().window().maximize();
+		 } catch (Exception e) {
+			 System.out.println("Could not maximize window: " + e.getMessage());
+		 }
 		 try {
 			driver.get(prop.getProperty("url"));
 		} catch (Exception e) {
